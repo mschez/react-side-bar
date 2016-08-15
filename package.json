@@ -1,6 +1,6 @@
 {
   "name": "react-side-bar",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "React Side Bar Component",
   "homepage": "http://mschez.github.io/react-side-bar",
   "author": {
@@ -14,6 +14,13 @@
   "bugs": {
     "url" : "https://github.com/mschez/react-side-bar/issues",
     "email" : "mschezes@gmail.com"
+  },
+  "main": "./dist/SideBar.js",
+  "scripts": {
+    "build:dev": "./node_modules/.bin/webpack --config webpack.config.dev.js  --colors --progress ",
+    "build:prod": "./node_modules/.bin/webpack --config webpack.config.prod.js --colors --progress",
+    "dev": "npm run build:dev -- --watch --inline",
+    "prepublish": "npm run build:dev && npm run build:prod"
   },
   "keywords": [
     "bar",
