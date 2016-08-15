@@ -1,0 +1,9 @@
+.*.swp
+._*
+.DS_Store
+.git
+.npmrc
+.lock-wscript
+.wafpickle-*
+config.gypi
+npm-debug.log

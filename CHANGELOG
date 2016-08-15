@@ -1,0 +1,12 @@
+# Change Log
+All notable changes to this project will be documented in this file.
+This project adheres to [Semantic Versioning](http://semver.org/).
+
+## [0.2.0] - 2016-08-15
+### Added
+- First complete version of component with the following features:
+	- Open modes availables: **BEHIND**, **OVER** (by default), **PUSH**
+	- Side options: **LEFT** (by default), **RIGHT**
+
+### Changed
+- Updated **TODO** section in README.md.
