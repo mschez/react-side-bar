@@ -3,4 +3,4 @@
 
 ### TODO
   - Complete this README file with installation, configuration and examples of use.
-  - Added folder with **examples** and some stuff.
+  - Update example with more options.
