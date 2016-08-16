@@ -315,10 +315,6 @@ class SideBar extends React.Component {
       _translateX } = this.state;
     const barStyle = Object.assign({}, MENU_DEFAULT_STYLE);
 
-    if (topBar && this._topBar) {
-      barStyle.top = this._topBar.clientHeight;
-    }
-
     if (side === RIGHT) {
       delete barStyle.left;
       barStyle.right = 0;
@@ -376,7 +372,6 @@ class SideBar extends React.Component {
     };
 
     const topBarProps = {
-      ref: (comp => (this._topBar = comp))
       className: 'side-bar-topBar'
     };
 
