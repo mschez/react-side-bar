@@ -102,6 +102,11 @@ class SideBar extends React.Component {
         this.close();
       }
     }
+    if (nextProps.hasOwnProperty('size')) {
+      this.setState({
+        _translateTo: this.getOrientation() * parseInt(nextProps.size, 10)
+      });
+    }
   }
 
   close() {
@@ -313,7 +318,7 @@ class SideBar extends React.Component {
     const { children, bar, mode, side, size, topBar } = this.props;
     const { _currentOffsetX, _moved, _opening, _transition, _transform,
       _translateX } = this.state;
-    const barStyle = Object.assign({}, MENU_DEFAULT_STYLE);
+    const barStyle = Object.assign({}, MENU_DEFAULT_STYLE, { width: size });
 
     if (side === RIGHT) {
       delete barStyle.left;
