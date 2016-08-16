@@ -17,7 +17,6 @@ const MENU_DEFAULT_STYLE = {
   position: 'absolute',
   top: 0,
   WebkitOverflowScrolling: 'touch',
-  width: '256px',
   zIndex: 0
 };
 
