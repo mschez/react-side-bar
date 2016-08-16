@@ -107,6 +107,13 @@ class SideBar extends React.Component {
         _translateTo: this.getOrientation() * parseInt(nextProps.size, 10)
       });
     }
+    if (nextProps.hasOwnProperty('side')) {
+      this.setState({
+        _orientation: this.getOrientation(nextProps.side),
+        _translateTo:
+          this.getOrientation(nextProps.side) * parseInt(nextProps.size, 10)
+      });
+    }
   }
 
   close() {
@@ -328,7 +335,14 @@ class SideBar extends React.Component {
     if (~[PUSH, OVER].indexOf(mode)) {
       delete barStyle.left;
       delete barStyle.right;
-      const _transformMode = buildTranslate3d(_translateX - size);
+
+      let _transformMode = buildTranslate3d(_translateX - size);
+
+      if (side === RIGHT) {
+        const end = this._wrapper.clientWidth + _translateX;
+
+        _transformMode = buildTranslate3d(end);
+      }
 
       extendWithPrefix(barStyle, 'Transition', _transition);
       extendWithPrefix(barStyle, 'Transform', _transformMode);
