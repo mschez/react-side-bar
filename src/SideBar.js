@@ -167,8 +167,8 @@ class SideBar extends React.Component {
 
   onClickPanel() {
     this.close();
-    if (this.state.onClose) {
-      this.state.onClose();
+    if (this.props.onClose) {
+      this.props.onClose();
     }
   }
 
