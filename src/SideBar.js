@@ -354,19 +354,19 @@ class SideBar extends React.Component {
 
     // Build props for bar
     const contentProps = {
-      className: 'slide-content',
+      className: 'side-bar-content',
       style: CONTENT_DEFAULT_STYLE
     };
 
     // Build props for bar
     const barProps = {
-      className: 'slide-bar',
+      className: 'side-bar',
       style: barStyle
     };
 
     // Build props for panel
     const panelProps = {
-      className: 'slide-panel',
+      className: 'side-bar-panel',
       style: panelStyle,
       onTouchStart: this.resetTouchFn.bind(this),
       onTouchCancel: this.onTouchCancelFn.bind(this),
@@ -376,8 +376,8 @@ class SideBar extends React.Component {
     };
 
     const topBarProps = {
-      className: 'slide-topBar',
       ref: (comp => (this._topBar = comp))
+      className: 'side-bar-topBar'
     };
 
     // Build props for veil
