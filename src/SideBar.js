@@ -124,8 +124,8 @@ class SideBar extends React.Component {
     }, this.props.duration + 50);
   }
 
-  getOrientation() {
-    return this.props.side === LEFT ? 1 : -1;
+  getOrientation(side = this.props.side) {
+    return side === LEFT ? 1 : -1;
   }
 
   getVeilOpacity() {
@@ -149,7 +149,7 @@ class SideBar extends React.Component {
       opacity = _alpha;
     }
 
-    if (this.props.side !== LEFT) {
+    if (this.props.side === RIGHT) {
       opacity = (_alpha - opacity);
     }
 
@@ -279,7 +279,7 @@ class SideBar extends React.Component {
     const clientWidth = this._wrapper.clientWidth;
     const isOpen = this.isOpen();
     const isLeft = (side === LEFT);
-    const isRight = !isLeft;
+    const isRight = (side === RIGHT);
 
     const _preventOpen =
       (!touch) || (!isOpen && touchSize !== 0 && (
@@ -319,7 +319,7 @@ class SideBar extends React.Component {
       barStyle.top = this._topBar.clientHeight;
     }
 
-    if (side !== LEFT) {
+    if (side === RIGHT) {
       delete barStyle.left;
       barStyle.right = 0;
     }
