@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.3.1] - 2016-08-17
+### Added
+- First example of use with all props (Kitchen Sink)
+
 ## [0.3.0] - 2016-08-17
 ### Fixed
 - Some issues related with opening from right side when open with **OVER** or **PUSH** modes

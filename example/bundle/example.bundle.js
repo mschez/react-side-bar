@@ -8143,14 +8143,22 @@
 	
 	    _this.displayName = 'SideBarExample';
 	    _this.state = {
-	      barOpened: false
+	      barOpened: false,
+	      duration: 150,
+	      fx: 'cubic-bezier(0, 1, 0.85, 1)',
+	      mode: 'over',
+	      side: 'left',
+	      size: 256,
+	      topBarIncluded: false,
+	      touch: true,
+	      touchSize: 80
 	    };
 	    return _this;
 	  }
 	
 	  _createClass(SideBarExample, [{
-	    key: 'toggleMenu',
-	    value: function toggleMenu() {
+	    key: 'toggleBar',
+	    value: function toggleBar() {
 	      this.setState({ barOpened: !this.state.barOpened });
 	    }
 	  }, {
@@ -8164,49 +8172,411 @@
 	      this.setState({ barOpened: false });
 	    }
 	  }, {
+	    key: 'handleChangeDuration',
+	    value: function handleChangeDuration(event) {
+	      this.setState({ duration: parseInt(event.target.value, 10) });
+	    }
+	  }, {
+	    key: 'handleChangeFx',
+	    value: function handleChangeFx() {
+	      this.setState({ fx: event.target.value });
+	    }
+	  }, {
+	    key: 'handleChangeMode',
+	    value: function handleChangeMode(event) {
+	      this.setState({ mode: event.target.value });
+	    }
+	  }, {
+	    key: 'handleChangeSide',
+	    value: function handleChangeSide(event) {
+	      this.setState({ side: event.target.value });
+	    }
+	  }, {
+	    key: 'handleChangeSize',
+	    value: function handleChangeSize(event) {
+	      this.setState({ size: parseInt(event.target.value, 10) });
+	    }
+	  }, {
+	    key: 'handleChangeTopBar',
+	    value: function handleChangeTopBar(event) {
+	      this.setState({ topBarIncluded: !this.state.topBarIncluded });
+	    }
+	  }, {
+	    key: 'handleChangeTouch',
+	    value: function handleChangeTouch(event) {
+	      console.log(event.target.value);
+	      this.setState({ touch: !this.state.touch });
+	    }
+	  }, {
+	    key: 'handleChangeTouchSize',
+	    value: function handleChangeTouchSize(event) {
+	      this.setState({ touchSize: parseInt(event.target.value, 10) });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _state = this.state;
+	      var barOpened = _state.barOpened;
+	      var duration = _state.duration;
+	      var fx = _state.fx;
+	      var mode = _state.mode;
+	      var side = _state.side;
+	      var size = _state.size;
+	      var topBarIncluded = _state.topBarIncluded;
+	      var touch = _state.touch;
+	      var touchSize = _state.touchSize;
+	      var _SideBar$MODES = _SideBar2.default.MODES;
+	      var BEHIND = _SideBar$MODES.BEHIND;
+	      var OVER = _SideBar$MODES.OVER;
+	      var PUSH = _SideBar$MODES.PUSH;
+	      var _SideBar$SIDES = _SideBar2.default.SIDES;
+	      var LEFT = _SideBar$SIDES.LEFT;
+	      var RIGHT = _SideBar$SIDES.RIGHT;
+	
+	      var navIconClassName = ['nav-icon'];
+	
+	      if (barOpened) {
+	        navIconClassName.push('open');
+	      }
 	      var bar = _react2.default.createElement(
 	        'div',
-	        { className: 'side', style: { backgroundColor: 'green' } },
-	        'Menu'
+	        { className: 'side' },
+	        'Amazing SideBar'
+	      );
+	      var topBar = _react2.default.createElement(
+	        'div',
+	        { className: 'topBar' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'left' },
+	          _react2.default.createElement(
+	            'div',
+	            {
+	              className: navIconClassName.join(' '),
+	              onClick: this.toggleBar.bind(this) },
+	            _react2.default.createElement('span', null),
+	            _react2.default.createElement('span', null),
+	            _react2.default.createElement('span', null),
+	            _react2.default.createElement('span', null)
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'center' },
+	          'SideBar'
+	        ),
+	        _react2.default.createElement('div', { className: 'right' })
 	      );
 	
-	      var props = {
+	      var sideBarProps = {
 	        bar: bar,
-	        mode: _SideBar2.default.MODES.BEHIND,
-	        opened: this.state.barOpened,
+	        duration: duration,
+	        mode: mode,
+	        opened: barOpened,
 	        onOpen: this.onOpen.bind(this),
 	        onClose: this.onClose.bind(this),
+	        side: side,
+	        size: size,
+	        touch: touch,
+	        touchSize: touchSize,
 	        veilStyle: {
 	          opacity: 0.4
 	        }
 	      };
 	
+	      if (topBarIncluded) {
+	        sideBarProps.topBar = topBar;
+	      }
+	
 	      return _react2.default.createElement(
 	        _SideBar2.default,
-	        props,
+	        sideBarProps,
+	        !topBarIncluded && topBar,
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'header', style: { backgroundColor: 'gray' } },
+	          { className: 'principal' },
 	          _react2.default.createElement(
-	            'button',
-	            { onClick: this.toggleMenu.bind(this) },
-	            'Open'
+	            'section',
+	            { className: 'opened-option' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'title' },
+	              'Opened'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'explain' },
+	              'Set this option to open or close sidebar.'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'option-wrapper' },
+	              _react2.default.createElement('input', {
+	                id: 'opened-option',
+	                onChange: this.toggleBar.bind(this),
+	                type: 'checkbox',
+	                checked: barOpened }),
+	              _react2.default.createElement(
+	                'label',
+	                { htmlFor: 'opened-option' },
+	                'Opened'
+	              )
+	            )
 	          ),
 	          _react2.default.createElement(
-	            'span',
-	            null,
-	            'SideBarExample'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'principal', style: { backgroundColor: 'red' } },
+	            'section',
+	            { className: 'size-option' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'title' },
+	              'Size'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'explain' },
+	              'Set the width of the sidebar in pixels. (default: 256px)'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'option-wrapper' },
+	              _react2.default.createElement('input', { type: 'number',
+	                onChange: this.handleChangeSize.bind(this),
+	                value: size }),
+	              _react2.default.createElement(
+	                'span',
+	                null,
+	                'px'
+	              )
+	            )
+	          ),
 	          _react2.default.createElement(
-	            'span',
-	            null,
-	            'Amazing things'
+	            'section',
+	            { className: 'duration-option' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'title' },
+	              'Duration'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'explain' },
+	              'Set the duration of the opening and closing in milisecons. (default: 150ms)'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'option-wrapper' },
+	              _react2.default.createElement('input', { type: 'number',
+	                onChange: this.handleChangeDuration.bind(this),
+	                value: duration }),
+	              _react2.default.createElement(
+	                'span',
+	                null,
+	                'ms'
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'section',
+	            { className: 'topBar-option' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'title' },
+	              'TopBar'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'explain' },
+	              'This option allows integrate the topBar of the app as part of the SideBar component to open the sidebar ignoring the topBar.'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'option-wrapper' },
+	              _react2.default.createElement('input', {
+	                id: 'topBar-option',
+	                onChange: this.handleChangeTopBar.bind(this),
+	                type: 'checkbox',
+	                checked: topBarIncluded }),
+	              _react2.default.createElement(
+	                'label',
+	                { htmlFor: 'topBar-option' },
+	                'Include TopBar'
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'section',
+	            { className: 'openingMode-option' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'title' },
+	              'Mode'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'explain' },
+	              'Set opening mode. ',
+	              _react2.default.createElement(
+	                'b',
+	                null,
+	                'BEHIND'
+	              ),
+	              ', the sidebar keep behind the content of the app. ',
+	              _react2.default.createElement(
+	                'b',
+	                null,
+	                'OVER'
+	              ),
+	              ', the sidebar opens above the content. ',
+	              _react2.default.createElement(
+	                'b',
+	                null,
+	                'PUSH'
+	              ),
+	              ', the sidebar moves the content of the app.'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'option-wrapper' },
+	              _react2.default.createElement(
+	                'select',
+	                { value: mode, onChange: this.handleChangeMode.bind(this) },
+	                _react2.default.createElement(
+	                  'option',
+	                  { value: BEHIND },
+	                  BEHIND
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  { value: OVER },
+	                  OVER
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  { value: PUSH },
+	                  PUSH
+	                )
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'section',
+	            { className: 'openingSide-option' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'title' },
+	              'Side'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'explain' },
+	              'Set the side where to place the sidebar, ',
+	              _react2.default.createElement(
+	                'b',
+	                null,
+	                'LEFT'
+	              ),
+	              ' or',
+	              _react2.default.createElement(
+	                'b',
+	                null,
+	                'RIGHT'
+	              ),
+	              '.'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'option-wrapper' },
+	              _react2.default.createElement(
+	                'select',
+	                { value: side, onChange: this.handleChangeSide.bind(this) },
+	                _react2.default.createElement(
+	                  'option',
+	                  { value: LEFT },
+	                  LEFT
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  { value: RIGHT },
+	                  RIGHT
+	                )
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'section',
+	            { className: 'touch-option' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'title' },
+	              'Touch'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'explain' },
+	              'Enable or disable touch option.'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'option-wrapper' },
+	              _react2.default.createElement('input', {
+	                id: 'touch-option',
+	                onChange: this.handleChangeTouch.bind(this),
+	                type: 'checkbox',
+	                checked: touch }),
+	              _react2.default.createElement(
+	                'label',
+	                { htmlFor: 'touch-option' },
+	                'Enable touch'
+	              )
+	            )
+	          ),
+	          touch && _react2.default.createElement(
+	            'section',
+	            { className: 'touchSize-option' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'title' },
+	              'TouchSize'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'explain' },
+	              'If the touch option is enabled, this option allows set the size of the touchable zone, depends of the side selected.'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'option-wrapper' },
+	              _react2.default.createElement('input', { type: 'number',
+	                onChange: this.handleChangeTouchSize.bind(this),
+	                value: touchSize }),
+	              _react2.default.createElement(
+	                'span',
+	                null,
+	                'px'
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'section',
+	            { className: 'fx-option' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'title' },
+	              'FX'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'explain' },
+	              'This option allows set the effect to open the sidebar.'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'option-wrapper' },
+	              _react2.default.createElement('input', {
+	                type: 'text',
+	                onChange: this.handleChangeFx.bind(this),
+	                value: fx })
+	            )
 	          )
 	        )
 	      );
@@ -29167,7 +29537,6 @@
 	  position: 'absolute',
 	  top: 0,
 	  WebkitOverflowScrolling: 'touch',
-	  width: '256px',
 	  zIndex: 0
 	};
 	
@@ -29269,6 +29638,17 @@
 	          this.close();
 	        }
 	      }
+	      if (nextProps.hasOwnProperty('size')) {
+	        this.setState({
+	          _translateTo: this.getOrientation() * parseInt(nextProps.size, 10)
+	        });
+	      }
+	      if (nextProps.hasOwnProperty('side')) {
+	        this.setState({
+	          _orientation: this.getOrientation(nextProps.side),
+	          _translateTo: this.getOrientation(nextProps.side) * parseInt(nextProps.size, 10)
+	        });
+	      }
 	    }
 	  }, {
 	    key: 'close',
@@ -29296,7 +29676,9 @@
 	  }, {
 	    key: 'getOrientation',
 	    value: function getOrientation() {
-	      return this.props.side === LEFT ? 1 : -1;
+	      var side = arguments.length <= 0 || arguments[0] === undefined ? this.props.side : arguments[0];
+	
+	      return side === LEFT ? 1 : -1;
 	    }
 	  }, {
 	    key: 'getVeilOpacity',
@@ -29325,7 +29707,7 @@
 	        opacity = _alpha;
 	      }
 	
-	      if (this.props.side !== LEFT) {
+	      if (this.props.side === RIGHT) {
 	        opacity = _alpha - opacity;
 	      }
 	
@@ -29346,8 +29728,8 @@
 	    key: 'onClickPanel',
 	    value: function onClickPanel() {
 	      this.close();
-	      if (this.state.onClose) {
-	        this.state.onClose();
+	      if (this.props.onClose) {
+	        this.props.onClose();
 	      }
 	    }
 	  }, {
@@ -29475,7 +29857,7 @@
 	      var clientWidth = this._wrapper.clientWidth;
 	      var isOpen = this.isOpen();
 	      var isLeft = side === LEFT;
-	      var isRight = !isLeft;
+	      var isRight = side === RIGHT;
 	
 	      var _preventOpen = !touch || !isOpen && touchSize !== 0 && (isLeft && clientX > touchSize || isRight && clientX < clientWidth - touchSize);
 	
@@ -29522,13 +29904,9 @@
 	      var _transform = _state2._transform;
 	      var _translateX = _state2._translateX;
 	
-	      var barStyle = Object.assign({}, MENU_DEFAULT_STYLE);
+	      var barStyle = Object.assign({}, MENU_DEFAULT_STYLE, { width: size });
 	
-	      if (topBar && this._topBar) {
-	        barStyle.top = this._topBar.clientHeight;
-	      }
-	
-	      if (side !== LEFT) {
+	      if (side === RIGHT) {
 	        delete barStyle.left;
 	        barStyle.right = 0;
 	      }
@@ -29536,7 +29914,14 @@
 	      if (~[PUSH, OVER].indexOf(mode)) {
 	        delete barStyle.left;
 	        delete barStyle.right;
+	
 	        var _transformMode = buildTranslate3d(_translateX - size);
+	
+	        if (side === RIGHT) {
+	          var end = this._wrapper.clientWidth + _translateX;
+	
+	          _transformMode = buildTranslate3d(end);
+	        }
 	
 	        extendWithPrefix(barStyle, 'Transition', _transition);
 	        extendWithPrefix(barStyle, 'Transform', _transformMode);
@@ -29561,19 +29946,19 @@
 	
 	      // Build props for bar
 	      var contentProps = {
-	        className: 'slide-content',
+	        className: 'side-bar-content',
 	        style: CONTENT_DEFAULT_STYLE
 	      };
 	
 	      // Build props for bar
 	      var barProps = {
-	        className: 'slide-bar',
+	        className: 'side-bar',
 	        style: barStyle
 	      };
 	
 	      // Build props for panel
 	      var panelProps = {
-	        className: 'slide-panel',
+	        className: 'side-bar-panel',
 	        style: panelStyle,
 	        onTouchStart: this.resetTouchFn.bind(this),
 	        onTouchCancel: this.onTouchCancelFn.bind(this),
@@ -29585,10 +29970,7 @@
 	      };
 	
 	      var topBarProps = {
-	        className: 'slide-topBar',
-	        ref: function ref(comp) {
-	          return _this5._topBar = comp;
-	        }
+	        className: 'side-bar-topBar'
 	      };
 	
 	      // Build props for veil
