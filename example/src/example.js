@@ -16,6 +16,7 @@ class SideBarExample extends React.Component {
       mode: 'over',
       side: 'left',
       size: 256,
+      tolerance: 70,
       topBarIncluded: false,
       touch: true,
       touchSize: 80
@@ -58,8 +59,11 @@ class SideBarExample extends React.Component {
     this.setState({ topBarIncluded: !this.state.topBarIncluded });
   }
 
+  handleChangeTolerance(event) {
+    this.setState({ tolerance: parseInt(event.target.value, 10) });
+  }
+
   handleChangeTouch(event) {
-    console.log(event.target.value);
     this.setState({ touch: !this.state.touch });
   }
 
@@ -68,8 +72,8 @@ class SideBarExample extends React.Component {
   }
 
   render() {
-    const { barOpened, duration, fx, mode, side, size, topBarIncluded, touch,
-      touchSize } = this.state;
+    const { barOpened, duration, fx, mode, side, size, tolerance,
+      topBarIncluded, touch, touchSize } = this.state;
     const { BEHIND, OVER, PUSH } = SideBar.MODES;
     const { LEFT, RIGHT } = SideBar.SIDES;
     const navIconClassName = [ 'nav-icon' ];
@@ -93,12 +97,14 @@ class SideBarExample extends React.Component {
     const sideBarProps = {
       bar: bar,
       duration: duration,
+      fx: fx,
       mode: mode,
       opened: barOpened,
       onOpen: this.onOpen.bind(this),
       onClose: this.onClose.bind(this),
       side: side,
       size: size,
+      tolerance: tolerance,
       touch: touch,
       touchSize: touchSize,
       veilStyle: {
@@ -113,33 +119,7 @@ class SideBarExample extends React.Component {
     return (
       <SideBar {...sideBarProps}>
         { !topBarIncluded && topBar }
-        <div className='principal'>
-          <section className='opened-option'>
-            <div className='title'>Opened</div>
-            <div className='explain'>
-              Set this option to open or close sidebar.
-            </div>
-            <div className='option-wrapper'>
-              <input
-                id='opened-option'
-                onChange={this.toggleBar.bind(this)}
-                type='checkbox'
-                checked={barOpened} />
-              <label htmlFor='opened-option'>Opened</label>
-            </div>
-          </section>
-          <section className='size-option'>
-            <div className='title'>Size</div>
-            <div className='explain'>
-              Set the width of the sidebar in pixels. (default: 256px)
-            </div>
-            <div className='option-wrapper'>
-              <input type='number'
-                onChange={this.handleChangeSize.bind(this)}
-                value={size} />
-              <span>px</span>
-            </div>
-          </section>
+        <div className='main'>
           <section className='duration-option'>
             <div className='title'>Duration</div>
             <div className='explain'>
@@ -153,19 +133,16 @@ class SideBarExample extends React.Component {
               <span>ms</span>
             </div>
           </section>
-          <section className='topBar-option'>
-            <div className='title'>TopBar</div>
+          <section className='fx-option'>
+            <div className='title'>FX</div>
             <div className='explain'>
-              This option allows integrate the topBar of the app as part of the
-              SideBar component to open the sidebar ignoring the topBar.
+              This option allows set the effect to open the sidebar.
             </div>
             <div className='option-wrapper'>
               <input
-                id='topBar-option'
-                onChange={this.handleChangeTopBar.bind(this)}
-                type='checkbox'
-                checked={topBarIncluded} />
-              <label htmlFor='topBar-option'>Include TopBar</label>
+                type='text'
+                onChange={this.handleChangeFx.bind(this)}
+                value={fx} />
             </div>
           </section>
           <section className='openingMode-option'>
@@ -183,17 +160,70 @@ class SideBarExample extends React.Component {
               </select>
             </div>
           </section>
+          <section className='opened-option'>
+            <div className='title'>Opened</div>
+            <div className='explain'>
+              Set this option to open or close sidebar.
+            </div>
+            <div className='option-wrapper'>
+              <input
+                id='opened-option'
+                onChange={this.toggleBar.bind(this)}
+                type='checkbox'
+                checked={barOpened} />
+              <label htmlFor='opened-option'>Opened</label>
+            </div>
+          </section>
           <section className='openingSide-option'>
             <div className='title'>Side</div>
             <div className='explain'>
-              Set the side where to place the sidebar, <b>LEFT</b> or
-              <b>RIGHT</b>.
+              Set the side where to place the sidebar, <b>LEFT</b> or <b>RIGHT</b>.
             </div>
             <div className='option-wrapper'>
               <select value={side} onChange={this.handleChangeSide.bind(this)}>
                 <option value={LEFT}>{LEFT}</option>
                 <option value={RIGHT}>{RIGHT}</option>
               </select>
+            </div>
+          </section>
+          <section className='size-option'>
+            <div className='title'>Size</div>
+            <div className='explain'>
+              Set the width of the sidebar in pixels. (default: 256px)
+            </div>
+            <div className='option-wrapper'>
+              <input type='number'
+                onChange={this.handleChangeSize.bind(this)}
+                value={size} />
+              <span>px</span>
+            </div>
+          </section>
+          <section className='tolerance-option'>
+            <div className='title'>Tolerance</div>
+            <div className='explain'>
+              Set the tolerance of sidebar to decide if it has to open or close
+              when you slide de sidebar (default: 70px).
+            </div>
+            <div className='option-wrapper'>
+              <input type='number'
+                onChange={this.handleChangeTolerance.bind(this)}
+                value={tolerance} />
+              <span>px</span>
+            </div>
+          </section>
+          <section className='topBar-option'>
+            <div className='title'>TopBar</div>
+            <div className='explain'>
+              This option allows integrate the topBar of the app as part of the
+              SideBar component to open the sidebar ignoring the topBar.
+            </div>
+            <div className='option-wrapper'>
+              <input
+                id='topBar-option'
+                onChange={this.handleChangeTopBar.bind(this)}
+                type='checkbox'
+                checked={topBarIncluded} />
+              <label htmlFor='topBar-option'>Include TopBar</label>
             </div>
           </section>
           <section className='touch-option'>
@@ -225,18 +255,6 @@ class SideBarExample extends React.Component {
               </div>
             </section>
           }
-          <section className='fx-option'>
-            <div className='title'>FX</div>
-            <div className='explain'>
-              This option allows set the effect to open the sidebar.
-            </div>
-            <div className='option-wrapper'>
-              <input
-                type='text'
-                onChange={this.handleChangeFx.bind(this)}
-                value={fx} />
-            </div>
-          </section>
         </div>
       </SideBar>
     );

@@ -170,14 +170,14 @@ input[type='number'] {
   padding: 10px;
 }
 
-.principal {
+.main {
   background-color: #3E4358;
   height: 100vh;
   overflow-y: auto;
   padding: 10px;
 }
 
-.principal section:last-child {
+.main section:last-child {
   margin-bottom: 70px;
 }
 

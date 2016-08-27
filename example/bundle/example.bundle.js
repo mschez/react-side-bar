@@ -8149,6 +8149,7 @@
 	      mode: 'over',
 	      side: 'left',
 	      size: 256,
+	      tolerance: 70,
 	      topBarIncluded: false,
 	      touch: true,
 	      touchSize: 80
@@ -8202,9 +8203,13 @@
 	      this.setState({ topBarIncluded: !this.state.topBarIncluded });
 	    }
 	  }, {
+	    key: 'handleChangeTolerance',
+	    value: function handleChangeTolerance(event) {
+	      this.setState({ tolerance: parseInt(event.target.value, 10) });
+	    }
+	  }, {
 	    key: 'handleChangeTouch',
 	    value: function handleChangeTouch(event) {
-	      console.log(event.target.value);
 	      this.setState({ touch: !this.state.touch });
 	    }
 	  }, {
@@ -8222,6 +8227,7 @@
 	      var mode = _state.mode;
 	      var side = _state.side;
 	      var size = _state.size;
+	      var tolerance = _state.tolerance;
 	      var topBarIncluded = _state.topBarIncluded;
 	      var touch = _state.touch;
 	      var touchSize = _state.touchSize;
@@ -8271,12 +8277,14 @@
 	      var sideBarProps = {
 	        bar: bar,
 	        duration: duration,
+	        fx: fx,
 	        mode: mode,
 	        opened: barOpened,
 	        onOpen: this.onOpen.bind(this),
 	        onClose: this.onClose.bind(this),
 	        side: side,
 	        size: size,
+	        tolerance: tolerance,
 	        touch: touch,
 	        touchSize: touchSize,
 	        veilStyle: {
@@ -8294,61 +8302,7 @@
 	        !topBarIncluded && topBar,
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'principal' },
-	          _react2.default.createElement(
-	            'section',
-	            { className: 'opened-option' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'title' },
-	              'Opened'
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'explain' },
-	              'Set this option to open or close sidebar.'
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'option-wrapper' },
-	              _react2.default.createElement('input', {
-	                id: 'opened-option',
-	                onChange: this.toggleBar.bind(this),
-	                type: 'checkbox',
-	                checked: barOpened }),
-	              _react2.default.createElement(
-	                'label',
-	                { htmlFor: 'opened-option' },
-	                'Opened'
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'section',
-	            { className: 'size-option' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'title' },
-	              'Size'
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'explain' },
-	              'Set the width of the sidebar in pixels. (default: 256px)'
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'option-wrapper' },
-	              _react2.default.createElement('input', { type: 'number',
-	                onChange: this.handleChangeSize.bind(this),
-	                value: size }),
-	              _react2.default.createElement(
-	                'span',
-	                null,
-	                'px'
-	              )
-	            )
-	          ),
+	          { className: 'main' },
 	          _react2.default.createElement(
 	            'section',
 	            { className: 'duration-option' },
@@ -8377,30 +8331,24 @@
 	          ),
 	          _react2.default.createElement(
 	            'section',
-	            { className: 'topBar-option' },
+	            { className: 'fx-option' },
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'title' },
-	              'TopBar'
+	              'FX'
 	            ),
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'explain' },
-	              'This option allows integrate the topBar of the app as part of the SideBar component to open the sidebar ignoring the topBar.'
+	              'This option allows set the effect to open the sidebar.'
 	            ),
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'option-wrapper' },
 	              _react2.default.createElement('input', {
-	                id: 'topBar-option',
-	                onChange: this.handleChangeTopBar.bind(this),
-	                type: 'checkbox',
-	                checked: topBarIncluded }),
-	              _react2.default.createElement(
-	                'label',
-	                { htmlFor: 'topBar-option' },
-	                'Include TopBar'
-	              )
+	                type: 'text',
+	                onChange: this.handleChangeFx.bind(this),
+	                value: fx })
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -8460,6 +8408,34 @@
 	          ),
 	          _react2.default.createElement(
 	            'section',
+	            { className: 'opened-option' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'title' },
+	              'Opened'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'explain' },
+	              'Set this option to open or close sidebar.'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'option-wrapper' },
+	              _react2.default.createElement('input', {
+	                id: 'opened-option',
+	                onChange: this.toggleBar.bind(this),
+	                type: 'checkbox',
+	                checked: barOpened }),
+	              _react2.default.createElement(
+	                'label',
+	                { htmlFor: 'opened-option' },
+	                'Opened'
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'section',
 	            { className: 'openingSide-option' },
 	            _react2.default.createElement(
 	              'div',
@@ -8475,7 +8451,7 @@
 	                null,
 	                'LEFT'
 	              ),
-	              ' or',
+	              ' or ',
 	              _react2.default.createElement(
 	                'b',
 	                null,
@@ -8499,6 +8475,86 @@
 	                  { value: RIGHT },
 	                  RIGHT
 	                )
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'section',
+	            { className: 'size-option' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'title' },
+	              'Size'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'explain' },
+	              'Set the width of the sidebar in pixels. (default: 256px)'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'option-wrapper' },
+	              _react2.default.createElement('input', { type: 'number',
+	                onChange: this.handleChangeSize.bind(this),
+	                value: size }),
+	              _react2.default.createElement(
+	                'span',
+	                null,
+	                'px'
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'section',
+	            { className: 'tolerance-option' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'title' },
+	              'Tolerance'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'explain' },
+	              'Set the tolerance of sidebar to decide if it has to open or close when you slide de sidebar (default: 70px).'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'option-wrapper' },
+	              _react2.default.createElement('input', { type: 'number',
+	                onChange: this.handleChangeTolerance.bind(this),
+	                value: tolerance }),
+	              _react2.default.createElement(
+	                'span',
+	                null,
+	                'px'
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'section',
+	            { className: 'topBar-option' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'title' },
+	              'TopBar'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'explain' },
+	              'This option allows integrate the topBar of the app as part of the SideBar component to open the sidebar ignoring the topBar.'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'option-wrapper' },
+	              _react2.default.createElement('input', {
+	                id: 'topBar-option',
+	                onChange: this.handleChangeTopBar.bind(this),
+	                type: 'checkbox',
+	                checked: topBarIncluded }),
+	              _react2.default.createElement(
+	                'label',
+	                { htmlFor: 'topBar-option' },
+	                'Include TopBar'
 	              )
 	            )
 	          ),
@@ -8554,28 +8610,6 @@
 	                null,
 	                'px'
 	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'section',
-	            { className: 'fx-option' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'title' },
-	              'FX'
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'explain' },
-	              'This option allows set the effect to open the sidebar.'
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'option-wrapper' },
-	              _react2.default.createElement('input', {
-	                type: 'text',
-	                onChange: this.handleChangeFx.bind(this),
-	                value: fx })
 	            )
 	          )
 	        )
@@ -29714,6 +29748,16 @@
 	      return opacity;
 	    }
 	  }, {
+	    key: 'handleClickPanel',
+	    value: function handleClickPanel() {
+	      if (!this.state._opening) {
+	        this.close();
+	        if (this.props.onClose) {
+	          this.props.onClose();
+	        }
+	      }
+	    }
+	  }, {
 	    key: 'initTouchEvents',
 	    value: function initTouchEvents() {
 	      this.onScrollFn();
@@ -29723,14 +29767,6 @@
 	    key: 'isOpen',
 	    value: function isOpen() {
 	      return this.state.opened;
-	    }
-	  }, {
-	    key: 'onClickPanel',
-	    value: function onClickPanel() {
-	      this.close();
-	      if (this.props.onClose) {
-	        this.props.onClose();
-	      }
 	    }
 	  }, {
 	    key: 'onScrollFn',
@@ -29976,7 +30012,7 @@
 	      // Build props for veil
 	      var veilProps = {
 	        style: veilStyle,
-	        onClick: this.onClickPanel.bind(this)
+	        onClick: this.handleClickPanel.bind(this)
 	      };
 	
 	      // Build props for wrapper
@@ -30019,12 +30055,12 @@
 	
 	SideBar.propTypes = {
 	  children: _react2.default.PropTypes.array,
-	  bar: _react2.default.PropTypes.any.isRequired,
+	  bar: _react2.default.PropTypes.element.isRequired,
 	  duration: _react2.default.PropTypes.number,
 	  fx: _react2.default.PropTypes.string,
 	  mode: _react2.default.PropTypes.string,
-	  onClose: _react2.default.PropTypes.func.isRequired,
-	  onOpen: _react2.default.PropTypes.func.isRequired,
+	  onClose: _react2.default.PropTypes.func,
+	  onOpen: _react2.default.PropTypes.func,
 	  opened: _react2.default.PropTypes.bool,
 	  tolerance: _react2.default.PropTypes.number,
 	  touch: _react2.default.PropTypes.bool,
