@@ -168,6 +168,15 @@ class SideBar extends React.Component {
     return opacity;
   }
 
+  handleClickPanel() {
+    if (!this.state._opening) {
+      this.close();
+      if (this.props.onClose) {
+        this.props.onClose();
+      }
+    }
+  }
+
   initTouchEvents() {
     this.onScrollFn();
     window.document.addEventListener('touchmove', this.preventMove.bind(this));
@@ -175,13 +184,6 @@ class SideBar extends React.Component {
 
   isOpen() {
     return this.state.opened;
-  }
-
-  onClickPanel() {
-    this.close();
-    if (this.props.onClose) {
-      this.props.onClose();
-    }
   }
 
   onScrollFn() {
@@ -397,7 +399,7 @@ class SideBar extends React.Component {
     // Build props for veil
     const veilProps = {
       style: veilStyle,
-      onClick: this.onClickPanel.bind(this)
+      onClick: this.handleClickPanel.bind(this)
     };
 
     // Build props for wrapper
@@ -423,12 +425,12 @@ class SideBar extends React.Component {
 
 SideBar.propTypes = {
   children: React.PropTypes.array,
-  bar: React.PropTypes.any.isRequired,
+  bar: React.PropTypes.element.isRequired,
   duration: React.PropTypes.number,
   fx: React.PropTypes.string,
   mode: React.PropTypes.string,
-  onClose: React.PropTypes.func.isRequired,
-  onOpen: React.PropTypes.func.isRequired,
+  onClose: React.PropTypes.func,
+  onOpen: React.PropTypes.func,
   opened: React.PropTypes.bool,
   tolerance: React.PropTypes.number,
   touch: React.PropTypes.bool,
