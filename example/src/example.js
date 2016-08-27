@@ -177,7 +177,8 @@ class SideBarExample extends React.Component {
           <section className='openingSide-option'>
             <div className='title'>Side</div>
             <div className='explain'>
-              Set the side where to place the sidebar, <b>LEFT</b> or <b>RIGHT</b>.
+              Set the side where to place the sidebar, <b>LEFT</b> or
+              <b>RIGHT</b>.
             </div>
             <div className='option-wrapper'>
               <select value={side} onChange={this.handleChangeSide.bind(this)}>
