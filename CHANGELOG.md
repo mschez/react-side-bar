@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.3.2] - 2016-08-27
+## Fixed
+- Fixed a bug when you touch the panel while sidebar is opening or closing.
+- Improve PropTypes of some props.
+## Added
+- Added implementation of tolerance in example.
+- Improve README.md with Installation, How to use, Examples and more.
+_ Added spanish translation of README.md.
+
 ## [0.3.1] - 2016-08-17
 ### Added
 - First example of use with all props (Kitchen Sink)

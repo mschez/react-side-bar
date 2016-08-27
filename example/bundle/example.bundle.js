@@ -8451,7 +8451,7 @@
 	                null,
 	                'LEFT'
 	              ),
-	              ' or ',
+	              ' or',
 	              _react2.default.createElement(
 	                'b',
 	                null,
