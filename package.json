@@ -17,10 +17,11 @@
   },
   "main": "./dist/SideBar.js",
   "scripts": {
-    "build:dev": "./node_modules/.bin/webpack --config webpack.config.dev.js  --colors --progress ",
+    "build:dev": "./node_modules/.bin/webpack --config webpack.config.dev.js  --colors --progress",
     "build:prod": "./node_modules/.bin/webpack --config webpack.config.prod.js --colors --progress",
     "dev": "npm run build:dev -- --watch --inline",
-    "build:all": "npm run build:dev && npm run build:prod"
+    "build:all": "npm run build:dev && npm run build:prod",
+    "prepublish": "npm run build:all"
   },
   "keywords": [
     "bar",
@@ -37,8 +38,6 @@
   ],
   "dependencies": {
     "babel-polyfill": "^6.9.1",
-    "babel-preset-react": "^6.5.0",
-    "babel-runtime": "^6.9.2",
     "decouple": "0.0.2",
     "react": "^15.2.1",
     "react-dom": "^15.2.1"
