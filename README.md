@@ -152,15 +152,16 @@ This property allow change the opening mode of the sidebar, you can choose from 
 
 * **Sidebar.BEHIND**
 
-<iframe src='https://gfycat.com/ifr/BriefZanyBeagle' frameborder='0' scrolling='no' width='200' height='360' allowfullscreen></iframe>
+<img src="doc/images/behind.gif" width="200">
 
 * **Sidebar.OVER**
 
-<iframe src='https://gfycat.com/ifr/GiantCompleteCony' frameborder='0' scrolling='no' width='200' height='360' allowfullscreen></iframe>
+<img src="doc/images/over.gif" width="200">
 
 * **Sidebar.PUSH**
 
-<iframe src='https://gfycat.com/ifr/ScornfulImmaculateAchillestang' frameborder='0' scrolling='no' width='200' height='360' allowfullscreen></iframe>
+<img src="doc/images/push.gif" width="200">
+
 
 #### opened (*boolean*: **true** | **false**)
 > Default: *false*
