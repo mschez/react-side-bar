@@ -222,7 +222,7 @@ Now you can see the example in [http://localhost:3000](http://localhost:3000)
 Don't forget enable the device in mode in your browser to test touch actions.
 
 
-## Importante
+## Important
 
 If you like this project, don't forget buy me a beer. ¡Thank you!
 
