@@ -18,14 +18,14 @@ cuando este proceso termine, ya podrás importar `react-side-bar` en tu proyecto
 ## Cómo usar
 Para empezar a usar `react-side-bar` tienes que importar el componente en tu proyecto:
 
-```
+```javascript
 import Sidebar from 'react-side-bar';
 ```
 
 Una vez importado hay que crear un objecto para pasar las propiedades al componente.
 Es obligatorio pasar la propiedad `bar`. Esta propiedad, es en realidad un nodo de **React** que será nuestra `Sidebar`.
 
-```
+```javascript
 const sidebarProps = {
 	bar: (<div>Amazing Sidebar</div>),
 	size: 200
@@ -38,7 +38,7 @@ Puedes configurar `react-side-bar` con más propiedades. Puedes verlas en [Propi
 
 Si tu intención es la de tener un botón (tipo *menú hamburguesa* por ejemplo) que abra y cierre `react-side-bar` es necesario que tengas una referencia en el estado de tu clase para saber si `react-side-bar` está abierto o no.
 
-```
+```javascript
 constructor(props) {
 	this.state = {
 		opened: false (or true)
@@ -54,7 +54,7 @@ El cometido de estas funciones es el de mantener actualiza la propiedad *abierto
 
 Para cerrar:
 
-```
+```javascript
 onClose: () => {
 	setState({ opened: false })
 }
@@ -62,7 +62,7 @@ onClose: () => {
 
 Para abrir:
 
-```
+```javascript
 onOpen: () => {
 	setState({ opened: true })
 }
@@ -72,7 +72,7 @@ Además puedes utilizar estas funciones para agregar funcionalidad extra a tu ap
 
 El objeto con las propiedades de *onClose*, *onOpen* quedaría así:
 
-```
+```javascript
 const sidebarProps = {
 	bar: (<div>Amazing Sidebar</div>),
 	opened: this.state.opened,
@@ -88,13 +88,13 @@ const sidebarProps = {
 
 Una vez que tengamos el objecto con las propiedades, inicializamos el componente `Sidebar` esas propiedades.
 
-```
+```javascript
 <Sidebar {... sidebarProps} />
 ```
 
 también puede definirse de la siguiente forma:
 
-```
+```javascript
 <Sidebar
 	bar={(<div>Amazing Sidebar</div>)}
 	size={300} />
@@ -107,7 +107,7 @@ El resultado de esta configuration sería algo así:
 
 Para añadir contenido a la aplicación únicamente tendremos que añadir hijos al componente.
 
-```
+```javascript
 <Sidebar {... sidebarProps}>
 	<div className='topBar'>SIDEBAR</div>
 	<div className='main'>Main</div>
@@ -121,7 +121,7 @@ Con algo de estilo y alguna mejora, podría quedar algo así:
 
 En el anterior ejemplo, se creó un *div* con el estilo necesario para crear una barra superior pero con `react-side-bar` podemos pasarle este componente con la barra superior como propiedad para modificar el efecto de apertura del componente.
 
-```
+```javascript
 const sidebarProps = {
 	bar: (<div>Amazing Sidebar</div>),
 	topBar: (<div className='topBar'>SIDEBAR</div>),

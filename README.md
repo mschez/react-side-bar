@@ -16,14 +16,14 @@ when the process ends, you are ready to import `react-side-bar` in your project.
 ## How to use
 To use `react-side-bar` you have to import the component in your project:
 
-```
+```javascript
 import Sidebar from 'react-side-bar';
 ```
 Once imported you have to create an object with the props to pass to the component.
 The property `bar` is mandatory because it is a **React** node with the `Sidebar`.
 This property have to be a **React** element, it will be our `sidebar`.
 
-```
+```javascript
 const sidebarProps = {
 	bar: (<div>Amazing Sidebar</div>),
 	size: 200
@@ -34,7 +34,7 @@ You can add more props to `react-side-bar`. You can see it in [Properties](#prop
 ### Add a button to open the sidebar
 If you want add a button to open/close `react-side-bar` (*hamburguer menu* for example) is needed a reference in the state of your component to expose if `react-side-bar` is open or not
 
-```
+```javascript
 constructor(props) {
 	this.state = {
 		opened: false (or true)
@@ -50,7 +50,7 @@ The function of this properties is keep updated the property *opened* of compone
 
 Close:
 
-```
+```javascript
 onClose: () => {
 	setState({ opened: false })
 }
@@ -58,7 +58,7 @@ onClose: () => {
 
 Open:
 
-```
+```javascript
 onOpen: () => {
 	setState({ opened: true })
 }
@@ -68,7 +68,7 @@ Moreover you can use this functions to add extra functionality for your applicat
 
 The object of properties with  *onClose*, *onOpen* should be like that:
 
-```
+```javascript
 const sidebarProps = {
 	bar: (<div>Amazing Sidebar</div>),
 	opened: this.state.opened,
@@ -84,13 +84,13 @@ const sidebarProps = {
 
 Once you have the object with properties, you can init the component `Sidebar`.
 
-```
+```javascript
 <Sidebar {... sidebarProps} />
 ```
 
 or:
 
-```
+```javascript
 <Sidebar
 	bar={(<div>Amazing Sidebar</div>)}
 	size={300} />
@@ -103,7 +103,7 @@ Output:
 
 To add content for the application you just have to add a children inside `Sidebar`.
 
-```
+```javascript
 <Sidebar {... sidebarProps}>
 	<div className='topBar'>SIDEBAR</div>
 	<div className='main'>Main</div>
@@ -117,7 +117,7 @@ With style and some improvements, it could be like that:
 
 With `react-side-bar` you can pass the topBar component (passed as children in example above) as a property to change the effect when opening.
 
-```
+```javascript
 const sidebarProps = {
 	bar: (<div>Amazing Sidebar</div>),
 	topBar: (<div className='topBar'>SIDEBAR</div>),
