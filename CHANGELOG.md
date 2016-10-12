@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Next
+- Improve Example  moving topBar configuration to another section. Enable
+double sidebar.
+
+## [0.3.3] - 2016-10-12
+## Fixed
+- Fixed a bug with two instances of babel-polyfill. Deleted babel-polyfill in production bundle.
+
 ## [0.3.2] - 2016-08-27
 ## Fixed
 - Fixed a bug when you touch the panel while sidebar is opening or closing.

@@ -4,10 +4,7 @@ var webpack = require('webpack');
 var baseConfig = require('./webpack.config.base');
 
 var config = {
-  entry: [
-    'babel-polyfill',
-    './src/SideBar.js'
-  ],
+  entry: [ './src/SideBar.js' ],
   output: {
     path: __dirname,
     filename: './dist/SideBar.js'
