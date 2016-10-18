@@ -22,7 +22,7 @@
     "dev": "npm run build:dev -- --watch --inline",
     "build:all": "npm run build:dev && npm run build:prod",
     "postversion": "git push && git push --tags && npm publish",
-    "version": "npm run build:all && git add -A ./dist/ ./example",
+    "version": "npm run build:all && git add -A ./dist/ ./example"
   },
   "keywords": [
     "bar",
