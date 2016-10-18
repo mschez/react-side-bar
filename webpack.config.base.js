@@ -4,14 +4,14 @@ var webpack = require('webpack');
 
 var config = {
   resolve: {
-    extensions: [ '', '.js', '.jsx' ]
+    extensions: ['', '.js', '.jsx']
   },
   module: {
     loaders: [
       {
         test: /.jsx?$/,
         loader: 'babel-loader',
-        exclude: /node_modules/,
+        exclude: ['node_modules', './dist'],
         query: {
           presets: ['es2015', 'react']
         }
@@ -19,7 +19,7 @@ var config = {
       {
         test: /.jsx?$/,
         loader: "eslint-loader",
-        exclude: /node_modules/
+        exclude: ['node_modules', './dist']
       }
     ]
   }

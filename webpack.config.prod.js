@@ -7,7 +7,10 @@ var config = {
   entry: [ './src/SideBar.js' ],
   output: {
     path: __dirname,
-    filename: './dist/SideBar.js'
+    filename: './dist/SideBar.js',
+    library: 'SideBar',
+    libraryTarget: 'umd',
+    umdNamedDefine: true
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
