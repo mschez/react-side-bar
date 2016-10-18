@@ -21,7 +21,8 @@
     "build:prod": "./node_modules/.bin/webpack --config webpack.config.prod.js --colors --progress",
     "dev": "npm run build:dev -- --watch --inline",
     "build:all": "npm run build:dev && npm run build:prod",
-    "prepublish": "npm run build:all"
+    "postversion": "git push && git push --tags && npm publish",
+    "preversion": "npm run build:all"
   },
   "keywords": [
     "bar",
