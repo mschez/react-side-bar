@@ -362,16 +362,17 @@ class SideBar extends React.Component {
       this.props.veilStyle, VEIL_INITIAL_STYLE,
       { opacity: this.getVeilOpacity() });
 
-    const wrapperStyle = {};
+    const wrapperStyle = {},
+          opened = this.isOpen();
 
-    if (this.isOpen() || _moved) {
+    if (opened || _moved) {
       panelStyle.overflow = 'hidden';
       wrapperStyle.overflow = 'hidden';
     }
 
     // Build props for bar
     const contentProps = {
-      className: 'side-bar-content',
+      className: `side-bar-content${ opened ? ' opened' : '' }`,
       style: CONTENT_DEFAULT_STYLE
     };
 
