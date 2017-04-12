@@ -5,54 +5,60 @@
 
 
 ## Installation
-You can install `react-side-bar` executing this command:
+
+You can install `react-side-bar` by executing this command:
 
 ```
 npm install --save react-side-bar
 ```
-when the process ends, you are ready to import `react-side-bar` in your project.
+
+When the installation process ends, you are ready to import `react-side-bar` to your project.
 
 
-## How to use
+## How to Use
+
 To use `react-side-bar` you have to import the component in your project:
 
 ```javascript
 import Sidebar from 'react-side-bar';
 ```
-Once imported you have to create an object with the props to pass to the component.
-The property `bar` is mandatory because it is a **React** node with the `Sidebar`.
-This property have to be a **React** element, it will be our `sidebar`.
+
+Once import is done, you have to create an object with some required properties.
+The property `bar` is a required **React** component which is placed in the sidebar.
 
 ```javascript
 const sidebarProps = {
-	bar: (<div>Amazing Sidebar</div>),
-	size: 200
+    bar: (<div>Amazing Sidebar</div>),
+    size: 200
 };
 ```
-You can add more props to `react-side-bar`. You can see it in [Properties](#properties).
 
-### Add a button to open the sidebar
-If you want add a button to open/close `react-side-bar` (*hamburguer menu* for example) is needed a reference in the state of your component to expose if `react-side-bar` is open or not
+You can add more properties to `react-side-bar`, see the list of available properties in [Properties](#properties) section.
+
+### Adding a Button to Open the Sidebar
+
+If you want to add a button for opening and closing `react-side-bar` (*hamburguer menu* for example), you need to reference the state of the sidebar, e.g.:
 
 ```javascript
 constructor(props) {
-	this.state = {
-		opened: false (or true)
-	}
+    this.state = {
+        opened: false // (or true)
+    }
 }
 ```
-in this way, there are two properties mandatory
+
+This way, there are two mandatory methods you need to define 
 
 * **onOpen** (function)
 * **onClose** (function)
 
-The function of this properties is keep updated the property *opened* of component. For this, must call to `setState` to change the value of the property. For exmaple:
+The purpose of this properties is to keep the *opened* property updated. To achieve this, you need to trigger `setState` to change the value of the *opened* property. For exmaple:
 
 Close:
 
 ```javascript
 onClose: () => {
-	setState({ opened: false })
+    setState({ opened: false });
 }
 ```
 
@@ -60,13 +66,13 @@ Open:
 
 ```javascript
 onOpen: () => {
-	setState({ opened: true })
+    setState({ opened: true });
 }
 ```
 
-Moreover you can use this functions to add extra functionality for your application such triggers when open or close `react-side-bar`.
+Moreover you can use this functions to add some extra functionality for your application, such as triggers, when opening or closing `react-side-bar`.
 
-The object of properties with  *onClose*, *onOpen* should be like that:
+The object of properties with *onClose*, *onOpen* should look like this:
 
 ```javascript
 const sidebarProps = {
@@ -101,7 +107,7 @@ Output:
 <img src="doc/images/screenshot1.png" width="200">
 <img src="doc/images/screenshot2.png" width="200">
 
-To add content for the application you just have to add a children inside `Sidebar`.
+To add content for the application you just have to add children inside `Sidebar`.
 
 ```javascript
 <Sidebar {... sidebarProps}>
@@ -110,12 +116,12 @@ To add content for the application you just have to add a children inside `Sideb
 </SideBar>
 ```
 
-With style and some improvements, it could be like that:
+With style and some improvements, it could be like this:
 
 <img src="doc/images/screenshot3.png" width="200">
 <img src="doc/images/screenshot4.png" width="200">
 
-With `react-side-bar` you can pass the topBar component (passed as children in example above) as a property to change the effect when opening.
+With `react-side-bar` you can pass the topBar component (passed as a children in the example above) as a property to change the effect when opening.
 
 ```javascript
 const sidebarProps = {
@@ -138,7 +144,7 @@ const sidebarProps = {
 #### duration (*number*)
 > Default: *150*
 
-This is the time it takes to open or close de sidebar.
+This is the time it takes to open or close the sidebar.
 
 #### fx (*string*)
 > Default: *cubic-bezier(0, 1, 0.85, 1)*
@@ -148,7 +154,7 @@ This is the effect of the sidebar when opening, o can test the default effect in
 #### mode (*string*: **Sidebar.BEHIND** | **Sidebar.OVER** | **Sidebar.PUSH**)
 > Default: *Sidebar.OVER*
 
-This property allow change the opening mode of the sidebar, you can choose from three different:
+This property allows to change the opening mode of the sidebar, you can choose from three different:
 
 * **Sidebar.BEHIND**
 
@@ -166,37 +172,38 @@ This property allow change the opening mode of the sidebar, you can choose from 
 #### opened (*boolean*: **true** | **false**)
 > Default: *false*
 
-This property show or hidden the sidebar.
+This property shows or hides the sidebar. Depending on the sidebar state, its wrapper element 
+features `class="side-bar-content opened"` and `class="side-bar-content closed"` class names.
 
 #### side (*string*: **Sidebar.LEFT** | **Sidebar.RIGHT**)
 > Default: *Sidebar.LEFT*
 
-This property allow to change the side of the opening of the sidebar.
+This property allows to change the side of the opening of the sidebar.
 
 #### size (*number*)
 > Default: *256*
 
-This property allow change the width of the sidebar.
+This property allows to change the width of the sidebar.
 
 #### tolerance (*number*)
 > Default: *70*
 
-This property set the tolerance to calculate the sensibility of the automatic opening of the sidebar.
+This property sets the tolerance to calculate the sensibility of the automatic opening of the sidebar.
 
 #### touch (*boolean*: **true** | **false**)
 > Default: *true*
 
-This property allow enable or disable touch events. If its value is *false* you have to add another alternative method to open as a *hamburguer menu*.
+This property allows to enable or disable touch events. If its value is *false* you have to add another alternative method to open sidebar as a *hamburguer menu*.
 
 #### touchSize (*number*)
 > Default: *80*
 
-With this property you can set the size of the touchable zone to start to drag the sidebar. If its value is 0 means that you can drag the sidebar everywhere.
+With this property you can set the size of the touchable zone to start dragging the sidebar. The value of `0` means that you can drag the sidebar everywhere.
 
 #### veilStyle (*object*)
 > Default: *{}*
 
-You can define the final style of the veil over the content of applicatio when the sidebar is open. While the sidebar is opening, this style have a opacity depending of the percent opening.
+You can define the final style of the veil over the content of application when the sidebar is open. While the sidebar is opening, this style have a opacity depending of the veil opening progress.
 
 
 ## Example
@@ -219,7 +226,7 @@ npm run dev
 
 Now you can see the example in [http://localhost:3000](http://localhost:3000)
 
-Don't forget enable the device in mode in your browser to test touch actions.
+Don't forget to check touch actions using the developer tools devices emulation.
 
 
 ## Important
