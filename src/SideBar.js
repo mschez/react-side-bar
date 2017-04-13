@@ -400,7 +400,8 @@ class SideBar extends React.Component {
     // Build props for veil
     const veilProps = {
       style: veilStyle,
-      onClick: this.handleClickPanel.bind(this)
+      onClick: this.handleClickPanel.bind(this),
+      className: "side-bar-veil"
     };
 
     // Build props for wrapper
