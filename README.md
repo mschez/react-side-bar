@@ -205,6 +205,8 @@ With this property you can set the size of the touchable zone to start dragging 
 
 You can define the final style of the veil over the content of application when the sidebar is open. While the sidebar is opening, this style have a opacity depending of the veil opening progress.
 
+You can also use CSS to style the veil by applying styles to `.side-bar-veil`.
+
 
 ## Example
 
