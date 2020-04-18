@@ -3,6 +3,10 @@
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=mschezes%40gmail%2ecom&lc=ES&item_name=Miguel%20S%c3%a1nchez&item_number=github&no_note=0&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHostedGuest) [![npm](https://img.shields.io/npm/v/react-side-bar.svg?)](http://badge.fury.io/js/react-side-bar) [![npm](https://img.shields.io/npm/dt/react-side-bar.svg)]() [![npm](https://img.shields.io/npm/l/react-side-bar.svg)](https://opensource.org/licenses/MIT)
 
+## Demo
+
+Check the [demo](https://mschez.github.io/react-side-bar/public).
+
 
 ## Installation
 
@@ -23,16 +27,6 @@ To use `react-side-bar` you have to import the component in your project:
 import Sidebar from 'react-side-bar';
 ```
 
-Once import is done, you have to create an object with some required properties.
-The property `bar` is a required **React** component which is placed in the sidebar.
-
-```javascript
-const sidebarProps = {
-    bar: (<div>Amazing Sidebar</div>),
-    size: 200
-};
-```
-
 You can add more properties to `react-side-bar`, see the list of available properties in [Properties](#properties) section.
 
 ### Adding a Button to Open the Sidebar
@@ -41,13 +35,13 @@ If you want to add a button for opening and closing `react-side-bar` (*hamburgue
 
 ```javascript
 constructor(props) {
-    this.state = {
-        opened: false // (or true)
-    }
+  this.state = {
+    opened: false // (or true)
+  }
 }
 ```
 
-This way, there are two mandatory methods you need to define 
+This way, there are two mandatory methods you need to define
 
 * **onOpen** (function)
 * **onClose** (function)
@@ -57,49 +51,35 @@ The purpose of this properties is to keep the *opened* property updated. To achi
 Close:
 
 ```javascript
-onClose: () => {
-    setState({ opened: false });
+() => {
+  this.setState({ opened: false });
 }
 ```
 
 Open:
 
 ```javascript
-onOpen: () => {
-    setState({ opened: true });
+() => {
+  this.setState({ opened: true });
 }
 ```
 
 Moreover you can use this functions to add some extra functionality for your application, such as triggers, when opening or closing `react-side-bar`.
 
-The object of properties with *onClose*, *onOpen* should look like this:
-
-```javascript
-const sidebarProps = {
-	bar: (<div>Amazing Sidebar</div>),
-	opened: this.state.opened,
-	onClose: () => {
-		setState({ opened: false })
-	},
-	onOpen: () => {
-		setState({ opened: true })
-	},
-	size: 200
-};
-```
-
 Once you have the object with properties, you can init the component `Sidebar`.
 
 ```javascript
-<Sidebar {... sidebarProps} />
-```
-
-or:
-
-```javascript
 <Sidebar
-	bar={(<div>Amazing Sidebar</div>)}
-	size={300} />
+	bar={<div>Amazing Sidebar</div>}
+	opened={this.state.opened}
+	onClose={() => {
+		this.setState({ opened: false })
+	}}
+	onOpen={() => {
+		this.setState({ opened: true })
+	}}
+	size={300}
+/>
 ```
 
 Output:
@@ -110,7 +90,7 @@ Output:
 To add content for the application you just have to add children inside `Sidebar`.
 
 ```javascript
-<Sidebar {... sidebarProps}>
+<Sidebar>
 	<div className='topBar'>SIDEBAR</div>
 	<div className='main'>Main</div>
 </SideBar>
@@ -124,14 +104,14 @@ With style and some improvements, it could be like this:
 With `react-side-bar` you can pass the topBar component (passed as a children in the example above) as a property to change the effect when opening.
 
 ```javascript
-const sidebarProps = {
-	bar: (<div>Amazing Sidebar</div>),
-	topBar: (<div className='topBar'>SIDEBAR</div>),
-	size: 300
-};
-
-<Sidebar {... sidebarProps}>
-	<div className='main'>Main</div>
+<Sidebar
+	bar={<div>Amazing Sidebar</div>}
+	topBar={<div className='topBar'>SIDEBAR</div>}
+	size={300}
+>
+	<div className='main'>
+		Main
+	</div>
 </SideBar>
 ```
 
@@ -172,8 +152,7 @@ This property allows to change the opening mode of the sidebar, you can choose f
 #### opened (*boolean*: **true** | **false**)
 > Default: *false*
 
-This property shows or hides the sidebar. Depending on the sidebar state, its wrapper element 
-features `class="side-bar-content opened"` and `class="side-bar-content closed"` class names.
+This property shows or hides the sidebar. Depending on the sidebar state, its wrapper element features `class="side-bar-content opened"` or `class="side-bar-content closed"` class names.
 
 #### side (*string*: **Sidebar.LEFT** | **Sidebar.RIGHT**)
 > Default: *Sidebar.LEFT*
@@ -208,13 +187,6 @@ You can define the final style of the veil over the content of application when 
 You can also use CSS to style the veil by applying styles to `.side-bar-veil`.
 
 
-## Example
-
-You can see the example in [Ejemplo](https://mschez.github.io/react-side-bar/example).
-
-Or download (or clone) the project and click in `index.html` inside `example` folder.
-
-
 ## Contribution
 
 If you want to do your own changes, share with community and contribute with the project:
@@ -226,7 +198,7 @@ npm install
 npm run dev
 ```
 
-Now you can see the example in [http://localhost:3000](http://localhost:3000)
+Now you can check the demo in [http://localhost:3000](http://localhost:3000)
 
 Don't forget to check touch actions using the developer tools devices emulation.
 
