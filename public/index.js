@@ -9,8 +9,10 @@ ReactDOM.render(
   document.getElementById('app'),
 );
 
-module.hot.accept('./App', () => {
-  const NextRootContainer = require('./App').default;
+if (module.hot) {
+  module.hot.accept('./App', () => {
+    const NextRootContainer = require('./App').default;
 
-  ReactDOM.render(<NextRootContainer />, document.getElementById('root'));
-});
+    ReactDOM.render(<NextRootContainer />, document.getElementById('root'));
+  });
+}

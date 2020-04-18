@@ -21,10 +21,10 @@
     "npm": "6.x"
   },
   "scripts": {
-    "build:dev": "./node_modules/.bin/webpack --config webpack.config.dev.js  --colors --progress",
+    "build:demo": "./node_modules/.bin/webpack --config webpack.config.demo.js  --colors --progress",
     "build:prod": "./node_modules/.bin/webpack --config webpack.config.prod.js --colors --progress",
     "dev": "webpack-dev-server --config webpack.config.dev.js --hot --inline",
-    "build:all": "npm run build:dev && npm run build:prod",
+    "build:all": "npm run build:demo && npm run build:prod",
     "postversion": "git push && git push --tags && npm publish",
     "version": "auto-changelog -p && git add CHANGELOG.md && npm run build:all && git add -A ./dist/ ./public"
   },
