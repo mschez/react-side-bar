@@ -1,28 +1,35 @@
+/* eslint-disable import/no-extraneous-dependencies */
+const path = require('path');
 
-// import WebpackDevServer from 'webpack-dev-server'
-var webpack = require('webpack');
-
-var config = {
-  resolve: {
-    extensions: ['', '.js', '.jsx']
-  },
+const config = {
   module: {
-    loaders: [
+    rules: [
       {
-        test: /.jsx?$/,
+        exclude: [/node_modules/, /dist/],
         loader: 'babel-loader',
-        exclude: ['node_modules', './dist'],
-        query: {
-          presets: ['es2015', 'react']
-        }
+        options: {
+          cacheDirectory: true,
+        },
+        test: /.jsx?$/,
       },
       {
+        exclude: [/node_modules/, /dist/],
+        loader: 'eslint-loader',
+        options: {
+          cache: true,
+        },
         test: /.jsx?$/,
-        loader: "eslint-loader",
-        exclude: ['node_modules', './dist']
-      }
-    ]
-  }
+      },
+    ],
+  },
+  resolve: {
+    alias: {
+      react: path.join(__dirname, 'node_modules', 'react'),
+      'react-dom': '@hot-loader/react-dom',
+    },
+    extensions: ['.js', '.jsx', '.json'],
+    modules: [path.resolve(__dirname), 'node_modules'],
+  },
 };
 
-module.exports = config
+module.exports = config;

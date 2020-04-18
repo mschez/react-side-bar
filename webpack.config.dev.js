@@ -1,27 +1,28 @@
+/* eslint-disable import/no-extraneous-dependencies */
+const merge = require('webpack-merge');
+const path = require('path');
 
-// import WebpackDevServer from 'webpack-dev-server'
-var webpack = require('webpack');
-var baseConfig = require('./webpack.config.base');
+const baseConfig = require('./webpack.config.base');
 
-var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
-
-var config = {
-  entry: [
-    'babel-polyfill',
-    './example/src/example.js'
-  ],
-  devtool: 'source-map',
-  output: {
-    path: __dirname,
-    filename: './example/bundle/example.bundle.js'
-  },
-  plugins: [
-    new BrowserSyncPlugin({
-      host: 'localhost',
+module.exports = merge(
+  baseConfig,
+  {
+    devServer: {
+      compress: true,
+      contentBase: path.join(__dirname, 'public'),
       port: 3000,
-      server: './example'
-    })
-  ]
-};
-
-module.exports = Object.assign({}, baseConfig, config);
+    },
+    devtool: 'inline-source-map',
+    entry: [
+      'webpack-dev-server/client?http://localhost:3000',
+      'webpack/hot/only-dev-server',
+      'react-hot-loader/patch',
+      './public/index.js',
+    ],
+    mode: 'development',
+    output: {
+      filename: './bundle.js',
+      path: path.join(__dirname, 'public'),
+    },
+  },
+);

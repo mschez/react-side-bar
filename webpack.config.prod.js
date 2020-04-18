@@ -1,30 +1,35 @@
+/* eslint-disable import/no-extraneous-dependencies */
+const webpack = require('webpack');
+const merge = require('webpack-merge');
 
-// import WebpackDevServer from 'webpack-dev-server'
-var webpack = require('webpack');
-var baseConfig = require('./webpack.config.base');
+const baseConfig = require('./webpack.config.base');
 
-var config = {
-  entry: [ './src/SideBar.js' ],
-  output: {
-    path: __dirname,
-    filename: './dist/SideBar.js',
-    library: 'SideBar',
-    libraryTarget: 'umd',
-    umdNamedDefine: true
+module.exports = merge(
+  baseConfig,
+  {
+    entry: ['./src/SideBar.js'],
+    output: {
+      filename: './dist/SideBar.js',
+      library: 'SideBar',
+      libraryTarget: 'umd',
+      path: __dirname,
+      umdNamedDefine: true,
+    },
+    plugins: [
+      new webpack.optimize.UglifyJsPlugin({
+        compress: {
+          pure_getters: true,
+          screw_ie8: true,
+          unsafe: true,
+          unsafe_comps: true,
+          warnings: false,
+        },
+        exclude: [/\.min\.js$/gi],
+        mangle: true,
+        output: {
+          comments: false,
+        },
+      }),
+    ],
   },
-  plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      beautify: false,
-      comments: false,
-      compress: {
-        warnings: false,
-        drop_console: true
-      }
-    }),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.DedupePlugin()
-
-  ]
-};
-
-module.exports = Object.assign({}, baseConfig, config);
+);
