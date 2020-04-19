@@ -389,7 +389,7 @@ const SideBar = ({
 
     let _transformMode = buildTranslate3d(state._translateX - size);
 
-    if (side === RIGHT) {
+    if (side === RIGHT && _wrapper.current) {
       const end = _wrapper.current.clientWidth + state._translateX;
 
       _transformMode = buildTranslate3d(end);
