@@ -7,6 +7,9 @@ module.exports = merge(
   baseConfig,
   {
     entry: ['./src/SideBar.js'],
+    externals: {
+      react: 'react',
+    },
     mode: 'production',
     optimization: {
       minimize: true,
@@ -14,9 +17,8 @@ module.exports = merge(
     output: {
       filename: './dist/SideBar.js',
       library: 'SideBar',
-      libraryTarget: 'umd',
+      libraryTarget: 'commonjs2',
       path: __dirname,
-      umdNamedDefine: true,
     },
   },
 );
